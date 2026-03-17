@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Automation Society</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #E87722;
+      --orange-dark: #C8641A;
+      --orange-light: #F5924A;
+      --dark: #1E1E1E;
+      --dark-2: #2B2B2B;
+      --gray: #6B7280;
+      --gray-light: #F3F4F6;
+      --white: #FFFFFF;
+      --border: #E5E7EB;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo img { height: 40px; display: block; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark-2);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover { color: var(--orange); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .2s;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--orange-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(232,119,34,0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--dark);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    .btn-lg {
+      padding: 14px 32px;
+      font-size: 16px;
+      border-radius: 10px;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #FAFAFA 0%, #FFF7F0 50%, #FAFAFA 100%);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(232,119,34,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(232,119,34,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(232,119,34,0.1);
+      color: var(--orange-dark);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      border: 1px solid rgba(232,119,34,0.2);
+    }
+
+    .hero-badge span { width: 6px; height: 6px; background: var(--orange); border-radius: 50%; animation: pulse 2s infinite; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .5; transform: scale(1.5); }
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+      color: var(--dark);
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--orange);
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--gray);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      max-width: 520px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-social-proof {
+      margin-top: 48px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .avatar-stack {
+      display: flex;
+    }
+
+    .avatar-stack img,
+    .avatar-stack .avatar-placeholder {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 2.5px solid white;
+      margin-left: -10px;
+      background: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .avatar-stack .avatar-placeholder:first-child { margin-left: 0; }
+
+    .hero-social-proof p { font-size: 14px; color: var(--gray); font-weight: 500; }
+    .hero-social-proof p strong { color: var(--dark); }
+
+    /* ─── HERO VISUAL ─── */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-card-main {
+      background: white;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.10);
+      width: 100%;
+      max-width: 440px;
+      border: 1px solid var(--border);
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-card-main img {
+      width: 100%;
+      max-width: 280px;
+      display: block;
+      margin: 0 auto 24px;
+    }
+
+    .card-stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .card-stat {
+      background: var(--gray-light);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .card-stat strong {
+      display: block;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .card-stat span {
+      font-size: 12px;
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    .card-stat.highlight {
+      background: var(--orange);
+    }
+
+    .card-stat.highlight strong,
+    .card-stat.highlight span { color: white; }
+
+    .floating-tag {
+      position: absolute;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--dark-2);
+      white-space: nowrap;
+    }
+
+    .floating-tag .icon {
+      width: 32px; height: 32px;
+      background: rgba(232,119,34,0.12);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .tag-1 { top: -24px; left: -40px; animation: float 4s ease-in-out infinite; }
+    .tag-2 { bottom: 40px; right: -40px; animation: float 4s ease-in-out infinite .5s; }
+    .tag-3 { top: 50%; right: -60px; animation: float 4s ease-in-out infinite 1s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ─── SECTIONS SHARED ─── */
+    section { padding: 96px 24px; }
+
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+
+    .section-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 18px;
+      color: var(--gray);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    .section-header {
+      margin-bottom: 64px;
+    }
+
+    .section-header.center {
+      text-align: center;
+    }
+
+    .section-header.center .section-sub { margin: 0 auto; }
+
+    /* ─── LOGOS STRIP ─── */
+    .logos {
+      padding: 40px 24px;
+      background: var(--gray-light);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logos p {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 24px;
+    }
+
+    .logos-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .logo-chip {
+      font-size: 15px;
+      font-weight: 700;
+      color: #9CA3AF;
+      letter-spacing: -0.5px;
+      transition: color .2s;
+    }
+
+    .logo-chip:hover { color: var(--dark); }
+
+    /* ─── FEATURES ─── */
+    .features { background: white; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .feature-card {
+      padding: 32px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      transition: all .25s;
+      background: white;
+    }
+
+    .feature-card:hover {
+      border-color: var(--orange);
+      box-shadow: 0 12px 40px rgba(232,119,34,0.10);
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      width: 52px; height: 52px;
+      background: rgba(232,119,34,0.10);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
+
+    .feature-card p { font-size: 15px; color: var(--gray); line-height: 1.65; }
+
+    /* ─── HOW IT WORKS ─── */
+    .how { background: var(--gray-light); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      counter-reset: steps;
+    }
+
+    .step {
+      text-align: center;
+      padding: 32px 20px;
+    }
+
+    .step-num {
+      width: 52px; height: 52px;
+      background: var(--orange);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 800;
+      margin: 0 auto 20px;
+    }
+
+    .step h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
+
+    .step p { font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+    /* ─── BENEFITS ─── */
+    .benefits { background: white; }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .benefit-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+
+    .benefit-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .benefit-check {
+      width: 24px; height: 24px;
+      background: rgba(232,119,34,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .benefit-check svg { width: 12px; height: 12px; stroke: var(--orange); stroke-width: 2.5; fill: none; }
+
+    .benefit-item h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--dark);
+    }
+
+    .benefit-item p { font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+    .benefits-visual {
+      background: linear-gradient(145deg, #1E1E1E, #2B2B2B);
+      border-radius: 20px;
+      padding: 40px;
+      color: white;
+    }
+
+    .benefits-visual h3 {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .benefits-visual p { font-size: 14px; color: #9CA3AF; margin-bottom: 28px; }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .stat-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .stat-box strong {
+      display: block;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--orange);
+    }
+
+    .stat-box span { font-size: 12px; color: #9CA3AF; font-weight: 500; }
+
+    .progress-section h4 { font-size: 13px; color: #9CA3AF; font-weight: 600; margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
+
+    .progress-row { margin-bottom: 12px; }
+
+    .progress-label { display: flex; justify-content: space-between; font-size: 13px; color: #D1D5DB; margin-bottom: 6px; }
+
+    .progress-bar { height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
+
+    .progress-fill { height: 100%; background: var(--orange); border-radius: 3px; }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials { background: var(--gray-light); }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      transition: box-shadow .2s;
+    }
+
+    .testimonial-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+
+    .stars { color: var(--orange); font-size: 16px; margin-bottom: 16px; letter-spacing: 2px; }
+
+    .testimonial-card p { font-size: 15px; color: var(--dark-2); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+
+    .author-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: white;
+    }
+
+    .author-avatar.alt { background: var(--dark-2); }
+
+    .author-info strong { display: block; font-size: 14px; font-weight: 700; color: var(--dark); }
+    .author-info span { font-size: 12px; color: var(--gray); }
+
+    /* ─── CTA ─── */
+    .cta {
+      background: linear-gradient(135deg, var(--dark) 0%, #111111 100%);
+      padding: 100px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 800px; height: 500px;
+      background: radial-gradient(circle, rgba(232,119,34,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta .section-inner { position: relative; z-index: 1; }
+
+    .cta h2 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .cta h2 em { font-style: normal; color: var(--orange); }
+
+    .cta p { font-size: 18px; color: #9CA3AF; margin-bottom: 40px; }
+
+    .cta-actions { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+    .btn-white {
+      background: white;
+      color: var(--dark);
+    }
+
+    .btn-white:hover {
+      background: #F3F4F6;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(255,255,255,0.15);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: white;
+      border: 1.5px solid rgba(255,255,255,0.2);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,0.5);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 48px 24px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-logo img { height: 32px; filter: brightness(0) invert(1); opacity: 0.7; }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 14px;
+      color: #6B7280;
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .footer-links a:hover { color: white; }
+
+    .footer-copy { font-size: 13px; color: #4B5563; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; text-align: center; }
+      .hero p { margin: 0 auto 40px; }
+      .hero-actions { justify-content: center; }
+      .hero-social-proof { justify-content: center; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .tag-1, .tag-2, .tag-3 { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <img src="brand_assets/2.png" alt="AI Automation Society" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#community">Community</a></li>
+        <li><a href="#join" class="btn btn-primary">Join Free</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span></span> Now open for new members
+        </div>
+        <h1>Automate More.<br /><em>Build Faster.</em><br />Together.</h1>
+        <p>
+          AI Automation Society is the community for builders, operators, and creators who use
+          AI-powered automation to work smarter — and want to do it with people who get it.
+        </p>
+        <div class="hero-actions">
+          <a href="#join" class="btn btn-primary btn-lg">Join the Community →</a>
+          <a href="#how-it-works" class="btn btn-outline btn-lg">See How It Works</a>
+        </div>
+        <div class="hero-social-proof">
+          <div class="avatar-stack">
+            <div class="avatar-placeholder" style="background:#E87722;margin-left:0">JK</div>
+            <div class="avatar-placeholder" style="background:#2B2B2B">SR</div>
+            <div class="avatar-placeholder" style="background:#C8641A">AM</div>
+            <div class="avatar-placeholder" style="background:#374151">TL</div>
+          </div>
+          <p><strong>2,400+ members</strong> already automating their workflows</p>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="floating-tag tag-1">
+          <div class="icon">⚡</div> Automation Live
+        </div>
+        <div class="hero-card-main">
+          <img src="brand_assets/2.png" alt="AI Automation Society Logo" />
+          <div class="card-stat-row">
+            <div class="card-stat highlight">
+              <strong>2.4K+</strong>
+              <span>Active Members</span>
+            </div>
+            <div class="card-stat">
+              <strong>340+</strong>
+              <span>Workflows Shared</span>
+            </div>
+            <div class="card-stat">
+              <strong>98%</strong>
+              <span>Satisfaction Rate</span>
+            </div>
+            <div class="card-stat">
+              <strong>50+</strong>
+              <span>Live Events/yr</span>
+            </div>
+          </div>
+        </div>
+        <div class="floating-tag tag-2">
+          <div class="icon">🤖</div> AI-First
+        </div>
+        <div class="floating-tag tag-3">
+          <div class="icon">🔗</div> 340+ Workflows
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGOS STRIP -->
+  <div class="logos">
+    <p>Members automate with</p>
+    <div class="logos-row">
+      <span class="logo-chip">Make</span>
+      <span class="logo-chip">Zapier</span>
+      <span class="logo-chip">n8n</span>
+      <span class="logo-chip">Trigger.dev</span>
+      <span class="logo-chip">OpenAI</span>
+      <span class="logo-chip">Anthropic</span>
+      <span class="logo-chip">Airtable</span>
+      <span class="logo-chip">Notion</span>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="section-inner">
+      <div class="section-header center">
+        <span class="section-label">What You Get</span>
+        <h2 class="section-title">Everything you need to automate at scale</h2>
+        <p class="section-sub">
+          Access a growing library of workflows, expert guidance, and a tight-knit community that
+          helps you move from idea to automation — fast.
+        </p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📚</div>
+          <h3>Workflow Library</h3>
+          <p>340+ real-world automation templates built and battle-tested by community members. Copy, remix, and deploy in minutes.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤝</div>
+          <h3>Expert Community</h3>
+          <p>Connect with automation engineers, indie hackers, and AI builders who share wins, debug problems, and collaborate on ideas.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎓</div>
+          <h3>Structured Learning</h3>
+          <p>From zero to automation hero. Step-by-step courses, workshops, and live sessions covering every major automation platform.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔴</div>
+          <h3>Weekly Live Calls</h3>
+          <p>Bring your automation challenges to live Q&A sessions. Get real-time answers from builders who've solved similar problems.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>AI Tools & Prompts</h3>
+          <p>A curated vault of AI prompts, Claude recipes, and GPT configurations specifically designed to power your automations.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🚀</div>
+          <h3>Build-in-Public</h3>
+          <p>Share your automations as you build them. Get feedback early, get accountability, and earn recognition from the community.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how-it-works">
+    <div class="section-inner">
+      <div class="section-header center">
+        <span class="section-label">The Process</span>
+        <h2 class="section-title">From idea to running automation in 4 steps</h2>
+        <p class="section-sub">
+          We've built a clear, repeatable process so you always know what to do next.
+        </p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Identify the Problem</h3>
+          <p>Pick a repetitive task in your business or workflow that drains time and energy every week.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Pick the Right Tools</h3>
+          <p>Browse the workflow library or ask the community which tools fit your use case best.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Build & Test</h3>
+          <p>Follow a template or build from scratch. Use the community to debug and refine your automation.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3>Deploy & Share</h3>
+          <p>Push to production, share your workflow, and start saving hours every single week.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="benefits" id="community">
+    <div class="section-inner">
+      <div class="benefits-grid">
+        <div>
+          <span class="section-label">Why Join</span>
+          <h2 class="section-title">Built for doers, not passive learners</h2>
+          <p class="section-sub" style="margin-bottom:40px;">
+            We care about implementation. Every resource, every call, every conversation is
+            designed to get you to a running automation — not just thinking about one.
+          </p>
+          <ul class="benefit-list">
+            <li class="benefit-item">
+              <div class="benefit-check">
+                <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+              </div>
+              <div>
+                <h4>No experience required</h4>
+                <p>We start from absolute zero. If you can use a spreadsheet, you can automate.</p>
+              </div>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-check">
+                <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+              </div>
+              <div>
+                <h4>Real-world use cases</h4>
+                <p>Every workflow comes from a real business problem solved by a real community member.</p>
+              </div>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-check">
+                <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+              </div>
+              <div>
+                <h4>Stay ahead of the curve</h4>
+                <p>AI and automation tools change weekly. We track what matters so you don't have to.</p>
+              </div>
+            </li>
+            <li class="benefit-item">
+              <div class="benefit-check">
+                <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+              </div>
+              <div>
+                <h4>Accountability & momentum</h4>
+                <p>Share your builds, celebrate wins, and stay consistent with a community behind you.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="benefits-visual">
+          <h3>Community at a Glance</h3>
+          <p>Live metrics from our growing community</p>
+          <div class="stat-grid">
+            <div class="stat-box">
+              <strong>2.4K</strong>
+              <span>Active Members</span>
+            </div>
+            <div class="stat-box">
+              <strong>340+</strong>
+              <span>Workflows</span>
+            </div>
+            <div class="stat-box">
+              <strong>12K+</strong>
+              <span>Hours Saved</span>
+            </div>
+            <div class="stat-box">
+              <strong>50+</strong>
+              <span>Live Events/yr</span>
+            </div>
+          </div>
+          <div class="progress-section">
+            <h4>Top Automation Categories</h4>
+            <div class="progress-row">
+              <div class="progress-label"><span>Lead Generation</span><span>87%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:87%"></div></div>
+            </div>
+            <div class="progress-row">
+              <div class="progress-label"><span>Content Creation</span><span>74%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:74%"></div></div>
+            </div>
+            <div class="progress-row">
+              <div class="progress-label"><span>Data Processing</span><span>61%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:61%"></div></div>
+            </div>
+            <div class="progress-row">
+              <div class="progress-label"><span>Customer Ops</span><span>53%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:53%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="section-inner">
+      <div class="section-header center">
+        <span class="section-label">Community Love</span>
+        <h2 class="section-title">Builders who made the leap</h2>
+        <p class="section-sub">Don't take our word for it — here's what members say after joining.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"I went from spending 3 hours a day on manual data entry to a fully automated pipeline in under 2 weeks. The workflow library alone is worth 10x the membership."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">JK</div>
+            <div class="author-info">
+              <strong>James K.</strong>
+              <span>E-commerce Operator</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"The community is genuinely helpful. I posted a question about a tricky API integration at 11pm and had three working solutions by morning. Incredible group."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar alt">SR</div>
+            <div class="author-info">
+              <strong>Sofia R.</strong>
+              <span>Marketing Agency Founder</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"I'm not technical at all, but the step-by-step courses made everything click. I've now automated my entire client onboarding process. Saves me 5 hours every week."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">AM</div>
+            <div class="author-info">
+              <strong>Alex M.</strong>
+              <span>Business Consultant</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="join">
+    <div class="section-inner">
+      <h2>Ready to automate<br /><em>everything</em>?</h2>
+      <p>Join 2,400+ members already building the future of work. Start free today.</p>
+      <div class="cta-actions">
+        <a href="#" class="btn btn-primary btn-lg">Join Free — Get Instant Access</a>
+        <a href="#features" class="btn btn-ghost btn-lg">Explore Features</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="brand_assets/2.png" alt="AI Automation Society" />
+      </div>
+      <ul class="footer-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#community">Community</a></li>
+        <li><a href="#join">Join</a></li>
+      </ul>
+      <p class="footer-copy">© 2026 AI Automation Society. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
